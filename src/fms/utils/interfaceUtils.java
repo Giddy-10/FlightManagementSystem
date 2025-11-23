@@ -1,6 +1,8 @@
 
-package fms;
+package fms.utils;
 
+import fms.interfaces.CustomerDashboard;
+import fms.interfaces.AdminDashboard;
 import javax.swing.JFrame;
 
 public class interfaceUtils {

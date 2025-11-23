@@ -1,5 +1,11 @@
 
-package fms;
+package fms.app;
+
+/**
+ *
+ * @author nyaga
+ */
+import fms.interfaces.RegisterUI;
 
 public class Main {
 
