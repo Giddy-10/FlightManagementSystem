@@ -1,29 +1,39 @@
 package fms.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nyaga
  */
-public class Flight {
+public class Flight implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private Plane plane;
     private Schedule flightTime;
     private int seatsTaken;
     private Destination flightDestination;
+    private int flightNumber;
     
     //Constructors
-    public Flight(Plane plane, Schedule flightTime, Destination flightDestination){
+    public Flight(int flightNumber, Plane plane, Schedule flightTime, Destination flightDestination){
+        this.flightNumber = flightNumber;
         this.plane = plane;
         this.flightTime = flightTime;
         this.flightDestination = flightDestination;
         this.seatsTaken = 0;
     }
-    public Flight(Plane plane, Schedule flightTime, Destination flightDestination, int seats){
+    public Flight(int flightNumber, Plane plane, Schedule flightTime, Destination flightDestination, int seats){
+        this.flightNumber = flightNumber;
         this.plane = plane;
         this.flightTime = flightTime;
         this.flightDestination = flightDestination;
         this.seatsTaken = seats;
     }
     //Getters 
+    public int getFlightNumber(){
+        return flightNumber;
+    }
     public Plane getPlane(){
         return plane;
     }

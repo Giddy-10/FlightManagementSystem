@@ -13,7 +13,7 @@
       "name": "New York",
       "duration": 905
     },
-    "flightNumber": 101
+    "flightNumber": 0
   },
   {
     "plane": {
@@ -29,6 +29,6 @@
       "name": "London",
       "duration": 563
     },
-    "flightNumber": 102
+    "flightNumber": 0
   }
 ]

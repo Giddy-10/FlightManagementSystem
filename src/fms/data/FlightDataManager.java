@@ -16,7 +16,8 @@ public class FlightDataManager {
     private List<Flight> flights;
     private List<Plane> planes;
     private List<Destination> destinations;
-    // Schedules are simple enough to be created on demand, or handled similarly if preferred
+    
+    private static int nextFlightNumber = 100;
 
     private static FlightDataManager instance;
 
@@ -44,9 +45,8 @@ public class FlightDataManager {
 
     private void initializeDefaultData() {
         System.out.println("Initializing default data...");
-        // Define your objects here and add them to the respective lists
         
-        // --- Planes ---
+        // Planes
         Plane nrg = new Plane("NRG-25", 1000);
         Plane nip = new Plane("NIP-31", 759);
         Plane kc = new Plane("KC-4", 1231);
@@ -54,7 +54,7 @@ public class FlightDataManager {
         planes.add(nip);
         planes.add(kc);
         
-        // --- Destinations ---
+        // Destinations
         Destination london = new Destination("London", 563);
         Destination amsterdam = new Destination("Amsterdam", 549);
         Destination newYork = new Destination("New York", 905);
@@ -62,10 +62,9 @@ public class FlightDataManager {
         destinations.add(amsterdam);
         destinations.add(newYork);
 
-        // --- Flights ---
-        // Reuse the objects defined above!
-        flights.add(new Flight(kc, new Schedule("Friday", Time.valueOf("10:27:00")), newYork));
-        flights.add(new Flight(nrg, new Schedule("Monday", Time.valueOf("08:30:00")), london, 726));
+        // Flights
+        flights.add(new Flight(getNextFlightNumber(), kc, new Schedule("Friday", Time.valueOf("10:27:00")), newYork));
+        flights.add(new Flight(getNextFlightNumber(), nrg, new Schedule("Monday", Time.valueOf("08:30:00")), london, 726));
     }
     
     // Saves all lists to their respective files
@@ -75,15 +74,63 @@ public class FlightDataManager {
         JsonPersistenceService.save(destinations, "destinations.json");
     }
 
-    // --- Accessor Methods (Getters) ---
+    public int getNextFlightNumber() {
+        // Find the maximum existing flight number to prevent duplicates 
+        // when loading data from the JSON file.
+        int max = nextFlightNumber;
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() > max) {
+                max = flight.getFlightNumber();
+            }
+        }
+        // If data was loaded, start the counter from max + 1
+        nextFlightNumber = max + 1;
+        return nextFlightNumber;
+    }
+    
+    // getters
     public List<Flight> getFlights() { return flights; }
     public List<Plane> getPlanes() { return planes; }
     public List<Destination> getDestinations() { return destinations; }
-
-    // --- Modification Methods ---
-    // Example: Add a new flight and save all data
-    public void addFlight(Flight newFlight) {
+    
+    public Plane getPlaneByName(String name) {
+        for (Plane p : planes) {
+            if (p.getName().equals(name)) {
+                return p;
+            }
+        }
+        return null; 
+    }
+    
+    public Destination getDestinationByName(String name) {
+        for (Destination d : destinations) {
+            if (d.getName().equals(name)) {
+                return d;
+            }
+        }
+        return null;
+    }
+    
+    // Modification Methods
+    public void addFlight(Plane plane, Schedule schedule, Destination destination) {
+        int newFlightNum = getNextFlightNumber();
+        Flight newFlight = new Flight(newFlightNum, plane, schedule, destination);
         flights.add(newFlight);
-        saveAllData(); // Save immediately after modification
+        saveAllData();
+    }
+    
+    public boolean changeFlightPlane(int flightNumber, Plane newPlane) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == flightNumber) {
+                if (newPlane.getCapacity() >= flight.getSeatsTaken()) { 
+                    flight.setPlane(newPlane);
+                    saveAllData(); 
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

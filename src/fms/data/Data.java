@@ -16,6 +16,6 @@ public class Data {
     Destination amsterdam = new Destination("Amsterdam", 549);
     Destination newYork = new Destination("New York", 905);
     
-    Flight toNewYork = new Flight(kc, new Schedule("Friday", Time.valueOf("10:27:00")), newYork);
-    Flight toLondon = new Flight(nrg, new Schedule("Monday", Time.valueOf("08:30:00")), london, 726);
+//    Flight toNewYork = new Flight(kc, new Schedule("Friday", Time.valueOf("10:27:00")), newYork);
+//    Flight toLondon = new Flight(nrg, new Schedule("Monday", Time.valueOf("08:30:00")), london, 726);
 }
