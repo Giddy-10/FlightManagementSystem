@@ -4,10 +4,8 @@
  */
 package fms.interfaces;
 
-/**
- *
- * @author GIDEON
- */
+import fms.data.FlightDataManager;
+
 public class AdminDashboard extends javax.swing.JFrame {
     private String registeredAdmin;
     
@@ -18,6 +16,16 @@ public class AdminDashboard extends javax.swing.JFrame {
      */
     public AdminDashboard(String adminName) {
         initComponents();
+        
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE); 
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                FlightDataManager.getInstance().saveAllData();
+                System.exit(0); 
+            }
+        });
         
         createFlightPanel.setVisible(false);
         changePlanePanel.setVisible(false);

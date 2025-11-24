@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package fms.interfaces;
 
+import fms.data.UserDataManager;
+import fms.model.Admin;
+import fms.model.User;
 import fms.utils.interfaceUtils;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author GIDEON
- */
 public class RegisterUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterUI.class.getName());
@@ -20,6 +18,9 @@ public class RegisterUI extends javax.swing.JFrame {
     public RegisterUI() {
         initComponents();
         
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        setupCustomerPanel();
         customerPanel.setVisible(false);
         adminPanel.setVisible(false);
         roleConfirmButton.setVisible(false);
@@ -35,15 +36,25 @@ public class RegisterUI extends javax.swing.JFrame {
     private void initComponents() {
 
         roleButtons = new javax.swing.ButtonGroup();
+        customerType = new javax.swing.ButtonGroup();
         customerButton = new javax.swing.JRadioButton();
         adminButton = new javax.swing.JRadioButton();
         roleConfirmButton = new javax.swing.JButton();
         customerPanel = new javax.swing.JPanel();
+        existingCustomerButton = new javax.swing.JRadioButton();
+        newCustomerButton = new javax.swing.JRadioButton();
+        customerListCombo = new javax.swing.JComboBox<>();
+        newCustomerInputPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        customerNameField = new javax.swing.JTextField();
+        newCustomerNameField = new javax.swing.JTextField();
+        newCustomerYoBCombo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        newCustomerNatIDField = new javax.swing.JTextField();
         adminPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         adminListCombo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,26 +81,106 @@ public class RegisterUI extends javax.swing.JFrame {
             }
         });
 
+        customerType.add(existingCustomerButton);
+        existingCustomerButton.setText("Existing Customer");
+        existingCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                existingCustomerButtonActionPerformed(evt);
+            }
+        });
+
+        customerType.add(newCustomerButton);
+        newCustomerButton.setText("New Customer");
+        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerButtonActionPerformed(evt);
+            }
+        });
+
+        customerListCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         jLabel2.setText("Full Name:");
+
+        newCustomerNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerNameFieldActionPerformed(evt);
+            }
+        });
+
+        newCustomerYoBCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Year of Birth:");
+
+        jLabel4.setText("National ID:");
+
+        javax.swing.GroupLayout newCustomerInputPanelLayout = new javax.swing.GroupLayout(newCustomerInputPanel);
+        newCustomerInputPanel.setLayout(newCustomerInputPanelLayout);
+        newCustomerInputPanelLayout.setHorizontalGroup(
+            newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newCustomerInputPanelLayout.createSequentialGroup()
+                .addGroup(newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newCustomerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newCustomerInputPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(newCustomerYoBCombo, 0, 101, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newCustomerNatIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(22, 22, 22))
+        );
+        newCustomerInputPanelLayout.setVerticalGroup(
+            newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newCustomerInputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(newCustomerInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newCustomerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newCustomerYoBCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newCustomerNatIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
         customerPanel.setLayout(customerPanelLayout);
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
+                .addComponent(existingCustomerButton)
+                .addGap(147, 147, 147)
+                .addComponent(newCustomerButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(customerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
+                        .addComponent(newCustomerInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerPanelLayout.createSequentialGroup()
+                        .addComponent(customerListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135))))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerPanelLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addComponent(customerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(existingCustomerButton)
+                    .addComponent(newCustomerButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(customerListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newCustomerInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
 
         jLabel1.setText("Select admin");
@@ -115,48 +206,59 @@ public class RegisterUI extends javax.swing.JFrame {
         adminPanelLayout.setVerticalGroup(
             adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminPanelLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(adminListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
+
+        jLabel5.setText("What's your role:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(customerButton)
+                .addGap(58, 58, 58)
+                .addComponent(adminButton)
+                .addGap(172, 172, 172))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(219, 219, 219))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(58, 58, 58)
+                .addComponent(customerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 50, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(222, 222, 222)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(adminButton)
-                                    .addComponent(customerButton)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(222, 222, 222)
-                                .addComponent(roleConfirmButton)))
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(customerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(adminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(199, Short.MAX_VALUE))
+                        .addGap(188, 188, 188)
+                        .addComponent(adminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(roleConfirmButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(customerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adminButton)
-                .addGap(18, 18, 18)
-                .addComponent(customerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adminButton)
+                    .addComponent(customerButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(customerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(adminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(roleConfirmButton)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,17 +281,49 @@ public class RegisterUI extends javax.swing.JFrame {
             if (selectedAdmin != null && !selectedAdmin.isEmpty()) {
                 interfaceUtils.openAdminDashboard(this, selectedAdmin);
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "If you are an admin, pick yourself from the list");
+                JOptionPane.showMessageDialog(this, "If you are an admin, pick yourself from the list");
             }
         } else if (customerButton.isSelected()) {
-            String customerName = customerNameField.getText().trim();
-            if (!customerName.isEmpty()) {
+            String customerName = null;
+            boolean successfulLogin = false;
+            
+            if (existingCustomerButton.isSelected()) {
+                customerName = (String) customerListCombo.getSelectedItem();
+                if (customerName != null && !customerName.contains("your name")) {
+                    successfulLogin = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please select your name from the list");
+                }
+            } else if (newCustomerButton.isSelected()) {
+                customerName = newCustomerNameField.getText().trim();
+                String YoBStr = newCustomerYoBCombo.getSelectedItem().toString();
+                String natIDStr = newCustomerNatIDField.getText().trim();
+                
+                if (!customerName.isEmpty() && !YoBStr.contains("your YoB") && !natIDStr.isEmpty()) {
+                    try {
+                        int YoB = Integer.parseInt(YoBStr);
+                        int natID = Integer.parseInt(natIDStr);
+                        
+                        String[] parts = customerName.split(" ", 2);
+                        if (parts.length < 2) throw new IllegalArgumentException("Full name required");
+                        
+                        User newUser = new User(parts[0], parts[1], YoB, natID);
+                        
+                        UserDataManager.getInstance().addCustomer(newUser);
+                        successfulLogin = true;
+                    } catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(this, "Invalid input. Check Year of Birth/Nat ID format or Full Name.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Enter all details for registration");
+                }
+            }
+            
+            if (successfulLogin && customerName != null) {
                 interfaceUtils.openCustomerDashboard(this, customerName);
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Enter your name");
+                JOptionPane.showMessageDialog(this, "Try again");
             }
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a user type");
         }
     }//GEN-LAST:event_roleConfirmButtonActionPerformed
 
@@ -204,16 +338,69 @@ public class RegisterUI extends javax.swing.JFrame {
             customerPanel.setVisible(true);
             adminPanel.setVisible(false);
             roleConfirmButton.setVisible(true);
+            
+            customerListCombo.setVisible(false);
+            newCustomerInputPanel.setVisible(false);
         }
     }//GEN-LAST:event_customerButtonActionPerformed
 
-    private void loadAdminList() {
-        String[] admins = {"Jane Doe", "John Smith", "System Admin"};
+    private void existingCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingCustomerButtonActionPerformed
+        // TODO add your handling code here:
+        customerListCombo.setVisible(true);
+        newCustomerInputPanel.setVisible(false);
+    }//GEN-LAST:event_existingCustomerButtonActionPerformed
 
-        adminListCombo.removeAllItems();
+    private void newCustomerNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCustomerNameFieldActionPerformed
+
+    private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
+        // TODO add your handling code here:
+        loadYears();
         
-        for (String admin : admins) {
-            adminListCombo.addItem(admin);
+        customerListCombo.setVisible(false);
+        newCustomerInputPanel.setVisible(true);
+    }//GEN-LAST:event_newCustomerButtonActionPerformed
+
+    private void setupCustomerPanel() {
+        newCustomerInputPanel.setVisible(false);
+        loadCustomerList();
+    }
+    
+    private void loadYears() {
+        newCustomerYoBCombo.removeAllItems();
+        newCustomerYoBCombo.addItem("Pick your YoB");
+        List<String> years = Arrays.asList(
+            "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007",
+            "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998",
+            "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989",
+            "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980",
+            "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971",
+            "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962",
+            "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953",
+            "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944",
+            "1943", "1942", "1941", "1940"
+        );
+        for (String year : years) {
+            newCustomerYoBCombo.addItem(year);
+        }
+    }
+    
+    private void loadAdminList() {
+        adminListCombo.removeAllItems();
+        for (Admin admin : UserDataManager.getInstance().getAdmins()) {
+            // Display full name for selection
+            adminListCombo.addItem(admin.getFirstName() + " " + admin.getLastName());
+        }
+    }
+    
+    
+    private void loadCustomerList() {
+        customerListCombo.removeAllItems();
+        customerListCombo.addItem("Pick your name");
+        
+        for (User customer : UserDataManager.getInstance().getCustomers()) {
+            customerListCombo.addItem(customer.getFirstName() + " " + customer.getLastName());
         }
     }
     
@@ -244,11 +431,23 @@ public class RegisterUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> adminListCombo;
     private javax.swing.JPanel adminPanel;
     private javax.swing.JRadioButton customerButton;
-    private javax.swing.JTextField customerNameField;
+    private javax.swing.JComboBox<String> customerListCombo;
     private javax.swing.JPanel customerPanel;
+    private javax.swing.ButtonGroup customerType;
+    private javax.swing.JRadioButton existingCustomerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JRadioButton newCustomerButton;
+    private javax.swing.JPanel newCustomerInputPanel;
+    private javax.swing.JTextField newCustomerNameField;
+    private javax.swing.JTextField newCustomerNatIDField;
+    private javax.swing.JComboBox<String> newCustomerYoBCombo;
     private javax.swing.ButtonGroup roleButtons;
     private javax.swing.JButton roleConfirmButton;
     // End of variables declaration//GEN-END:variables
+
+    
 }

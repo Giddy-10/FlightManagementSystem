@@ -1,0 +1,20 @@
+[
+  {
+    "workID": 101,
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "YoB": 1985
+  },
+  {
+    "workID": 102,
+    "firstname": "John",
+    "lastname": "Smith",
+    "YoB": 1978
+  },
+  {
+    "workID": 999,
+    "firstname": "System",
+    "lastname": "Admin",
+    "YoB": 1990
+  }
+]
