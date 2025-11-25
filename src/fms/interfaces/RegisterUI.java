@@ -4,6 +4,7 @@ import fms.data.UserDataManager;
 import fms.model.Admin;
 import fms.model.User;
 import fms.utils.interfaceUtils;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -57,6 +58,7 @@ public class RegisterUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         roleButtons.add(customerButton);
         customerButton.setText("Customer");

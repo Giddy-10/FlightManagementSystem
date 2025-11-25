@@ -5,7 +5,7 @@ package fms.model;
  * @author nyaga
  */
 public class Plane {
-    private String name;
+    private final String name;
     private int capacity;
     
     public Plane(String name, int capacity){

@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author nyaga
  */
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String firstname;
@@ -39,9 +39,6 @@ public class Person implements Serializable {
     }
    
 
-    // Method
-    public void showDetails(){
-        System.out.println("Name:" + firstname + "" + lastname);
-        System.out.println("Year of Birth:" + YoB);
-    }
+    // Abstract method
+    public abstract String showDetails();
 }

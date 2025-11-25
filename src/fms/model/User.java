@@ -20,10 +20,10 @@ public class User extends Person {
         this.natID= natID;
     }
     
-    //Methods   
-    public void showDetails(String firstName, String lastName, int natID){
-        System.out.println("User:" + firstName+ "" + lastName);
-        System.out.println("National ID:" + natID);
+    //Methods
+    @Override
+    public String showDetails() {
+        return "Admin: " + this.getFirstName() + " " + this.getLastName()+ ", " + this.natID;
     }
     public void bookFlight(Flight flight){
         System.out.println("Booking flight...");

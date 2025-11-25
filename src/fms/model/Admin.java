@@ -5,7 +5,7 @@ package fms.model;
  * @author nyaga
  */
 public class Admin extends Person{
-    public int workID;
+    private int workID;
     
     //constructor
     public Admin (String firstName, String lastName, int YoB, int workID){
@@ -22,10 +22,9 @@ public class Admin extends Person{
     }
     
     //Methods
-    public void showDetails(String firstName, String lastName, int natID){
-        System.out.println("Admin:" + firstName + "" + lastName);
-        System.out.println("Work ID:" + workID);
-        System.out.println("National ID:" + natID);
+    @Override
+    public String showDetails() {
+        return "Admin: " + this.getFirstName() + " " + this.getLastName()+ ", " + this.workID;
     }
     public void setPlane(Flight flight){
         System.out.println("Setting plane for the flight...");

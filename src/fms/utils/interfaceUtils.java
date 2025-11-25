@@ -3,6 +3,8 @@ package fms.utils;
 
 import fms.interfaces.CustomerDashboard;
 import fms.interfaces.AdminDashboard;
+import fms.interfaces.FlightInformationUI;
+import fms.interfaces.RegisterUI;
 import javax.swing.JFrame;
 
 public class interfaceUtils {
@@ -20,5 +22,19 @@ public class interfaceUtils {
         adminWindow.setVisible(true);
 
         currentScreen.dispose();
+    }
+    
+    public static void openRegisterUI(JFrame currentScreen) { // <-- NEW METHOD
+        RegisterUI registerWindow = new RegisterUI(); // Assuming RegisterUI constructor takes no arguments
+
+        registerWindow.setVisible(true);
+
+        currentScreen.dispose();
+    }
+    
+    public static void openFlightInfoDisplay(JFrame currentScreen) {
+        FlightInformationUI infoWindow = new FlightInformationUI();
+
+        infoWindow.setVisible(true);
     }
 }
