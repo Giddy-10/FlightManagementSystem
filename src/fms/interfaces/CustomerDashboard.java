@@ -27,9 +27,30 @@ public class CustomerDashboard extends javax.swing.JFrame {
             }
         });
         
+        loadDestinations();
+        
         this.registeredCustomer = customerName;
         
         welcomeLabel.setText("Welcome, " + customerName);
+    }
+    
+    private void loadDestinations() {
+        FlightDataManager manager = FlightDataManager.getInstance();
+        destinationCombo.removeAllItems();
+        destinationCombo.addItem("--- Select Destination ---");
+
+        java.util.Set<String> uniqueDestinations = new java.util.HashSet<>();
+        for (fms.model.Destination dest : manager.getDestinations()) {
+            uniqueDestinations.add(dest.getName());
+        }
+
+        for (String city : uniqueDestinations) {
+            destinationCombo.addItem(city);
+        }
+
+        flightCombo.removeAllItems();
+        flightCombo.addItem("--- Select a Flight ---");
+        flightCombo.setEnabled(false);
     }
 
     /**
@@ -45,10 +66,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
         welcomeLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        destinationCombo = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        flightCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        bookFlightSubmitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +81,12 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         jLabel2.setText("Choose your destination:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destinationCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinationComboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,7 +97,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -79,11 +106,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        flightCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Pick a flight:");
 
@@ -96,7 +123,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(flightCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -105,9 +132,16 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(flightCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        bookFlightSubmitButton.setText("Submit");
+        bookFlightSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookFlightSubmitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +158,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
                         .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(bookFlightSubmitButton)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,11 +175,91 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bookFlightSubmitButton)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void destinationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationComboActionPerformed
+        // TODO add your handling code here:
+        String selectedDestination = (String) destinationCombo.getSelectedItem();
+        flightCombo.removeAllItems();
+
+        if (selectedDestination == null || selectedDestination.contains("Select Destination")) {
+            flightCombo.addItem("--- Select a Flight ---");
+            flightCombo.setEnabled(false);
+            return;
+        }
+
+        FlightDataManager manager = FlightDataManager.getInstance();
+
+        for (fms.model.Flight flight : manager.getFlights()) {
+            // Check if the flight goes to the selected destination
+            if (flight.getDestination().getName().equals(selectedDestination)) {
+                // Check if there are seats available
+                int available = flight.getPlane().getCapacity() - flight.getSeatsTaken();
+
+                if (available > 0) {
+                    // Format the display string: "Flight # [Day, Time] (Available seats)"
+                    String display = String.format("Flight %d - %s, %s (%d seats)", 
+                        flight.getFlightNumber(), 
+                        flight.getSchedule().getDay(), 
+                        flight.getSchedule().getTime().toString().substring(0, 5), // Show HH:MM
+                        available
+                    );
+                    flightCombo.addItem(display);
+                }
+            }
+        }
+
+        if (flightCombo.getItemCount() > 0) {
+            flightCombo.setEnabled(true);
+        } else {
+            flightCombo.addItem("No available flights found.");
+            flightCombo.setEnabled(false);
+        }
+    }//GEN-LAST:event_destinationComboActionPerformed
+
+    private void bookFlightSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookFlightSubmitButtonActionPerformed
+        // TODO add your handling code here:
+        String selectedFlightDetail = (String) flightCombo.getSelectedItem();
+
+        if (selectedFlightDetail == null || selectedFlightDetail.contains("No available flights") || selectedFlightDetail.contains("Select a Flight")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an available flight first.");
+            return;
+        }
+
+        try {
+            String[] parts = selectedFlightDetail.split(" ");
+            int flightNumber = Integer.parseInt(parts[1]); 
+
+            boolean success = FlightDataManager.getInstance().attemptBookFlight(flightNumber);
+
+            if (success) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Booking successful! You are now on Flight " + flightNumber + " to " + (String)destinationCombo.getSelectedItem() + ".",
+                    "Success", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+                );
+
+                destinationComboActionPerformed(null); 
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Booking failed. This flight may have just been fully booked.", 
+                    "Flight Full", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+                );
+            }
+
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Internal error: Could not determine flight number.");
+            logger.log(java.util.logging.Level.SEVERE, "Error parsing flight number: " + selectedFlightDetail, e);
+        }
+    }//GEN-LAST:event_bookFlightSubmitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,8 +287,9 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton bookFlightSubmitButton;
+    private javax.swing.JComboBox<String> destinationCombo;
+    private javax.swing.JComboBox<String> flightCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

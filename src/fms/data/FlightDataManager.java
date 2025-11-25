@@ -111,6 +111,16 @@ public class FlightDataManager {
         return null;
     }
     
+        
+    public Flight getFlightByNumber(int flightNumber) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == flightNumber) {
+                return flight;
+            }
+        }
+        return null;
+    }
+    
     // Modification Methods
     public void addFlight(Plane plane, Schedule schedule, Destination destination) {
         int newFlightNum = getNextFlightNumber();
@@ -129,6 +139,18 @@ public class FlightDataManager {
                 } else {
                     return false;
                 }
+            }
+        }
+        return false;
+    }
+    
+    public boolean attemptBookFlight(int flightNumber) {
+        Flight flight = getFlightByNumber(flightNumber);
+
+        if (flight != null) {
+            if (flight.bookSeat()) {
+                saveAllData();
+                return true;
             }
         }
         return false;
