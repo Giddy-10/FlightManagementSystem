@@ -55,6 +55,8 @@ public class RegisterUI extends javax.swing.JFrame {
         adminPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         adminListCombo = new javax.swing.JComboBox<>();
+        adminPasswordLabel = new javax.swing.JLabel();
+        adminPasswordField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -195,6 +197,8 @@ public class RegisterUI extends javax.swing.JFrame {
             }
         });
 
+        adminPasswordLabel.setText("Password");
+
         javax.swing.GroupLayout adminPanelLayout = new javax.swing.GroupLayout(adminPanel);
         adminPanel.setLayout(adminPanelLayout);
         adminPanelLayout.setHorizontalGroup(
@@ -204,15 +208,23 @@ public class RegisterUI extends javax.swing.JFrame {
                 .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adminListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adminPasswordLabel)
+                    .addComponent(adminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         adminPanelLayout.setVerticalGroup(
             adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(adminPanelLayout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(adminPasswordLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adminListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(adminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adminListCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -242,7 +254,7 @@ public class RegisterUI extends javax.swing.JFrame {
                         .addGap(224, 224, 224)
                         .addComponent(roleConfirmButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
+                        .addGap(103, 103, 103)
                         .addComponent(adminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -282,7 +294,11 @@ public class RegisterUI extends javax.swing.JFrame {
         if (adminButton.isSelected()) {
             String selectedAdmin = (String) adminListCombo.getSelectedItem();
             if (selectedAdmin != null && !selectedAdmin.isEmpty()) {
-                interfaceUtils.openAdminDashboard(this, selectedAdmin);
+                if ("admin".equals(adminPasswordField.getText())) {
+                    interfaceUtils.openAdminDashboard(this, selectedAdmin);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Wrong password");
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "If you are an admin, pick yourself from the list");
             }
@@ -435,6 +451,8 @@ public class RegisterUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton adminButton;
     private javax.swing.JComboBox<String> adminListCombo;
     private javax.swing.JPanel adminPanel;
+    private javax.swing.JPasswordField adminPasswordField;
+    private javax.swing.JLabel adminPasswordLabel;
     private javax.swing.JRadioButton customerButton;
     private javax.swing.JComboBox<String> customerListCombo;
     private javax.swing.JPanel customerPanel;

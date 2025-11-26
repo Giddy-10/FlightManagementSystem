@@ -8,7 +8,7 @@
       "day": "Friday",
       "time": "10:27:00 AM"
     },
-    "seatsTaken": 1,
+    "seatsTaken": 2,
     "flightDestination": {
       "name": "New York",
       "duration": 905
@@ -94,5 +94,21 @@
       "duration": 549
     },
     "flightNumber": 106
+  },
+  {
+    "plane": {
+      "name": "NIP-31",
+      "capacity": 759
+    },
+    "flightTime": {
+      "day": "Friday",
+      "time": "02:56:00 AM"
+    },
+    "seatsTaken": 0,
+    "flightDestination": {
+      "name": "London",
+      "duration": 563
+    },
+    "flightNumber": 107
   }
 ]
