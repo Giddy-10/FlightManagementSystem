@@ -23,6 +23,7 @@ public class Flight implements Serializable {
         this.flightDestination = flightDestination;
         this.seatsTaken = 0;
     }
+    // Polymorphysm (overloading)
     public Flight(int flightNumber, Plane plane, Schedule flightTime, Destination flightDestination, int seats){
         this.flightNumber = flightNumber;
         this.plane = plane;
@@ -30,6 +31,7 @@ public class Flight implements Serializable {
         this.flightDestination = flightDestination;
         this.seatsTaken = seats;
     }
+    
     //Getters 
     public int getFlightNumber(){
         return flightNumber;

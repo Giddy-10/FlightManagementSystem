@@ -24,11 +24,75 @@
       "day": "Monday",
       "time": "08:30:00 AM"
     },
-    "seatsTaken": 727,
+    "seatsTaken": 730,
     "flightDestination": {
       "name": "London",
       "duration": 563
     },
     "flightNumber": 102
+  },
+  {
+    "plane": {
+      "name": "NRG-25",
+      "capacity": 1000
+    },
+    "flightTime": {
+      "day": "Wednesday",
+      "time": "12:43:00 PM"
+    },
+    "seatsTaken": 0,
+    "flightDestination": {
+      "name": "Amsterdam",
+      "duration": 549
+    },
+    "flightNumber": 103
+  },
+  {
+    "plane": {
+      "name": "NIP-31",
+      "capacity": 759
+    },
+    "flightTime": {
+      "day": "Monday",
+      "time": "02:34:00 PM"
+    },
+    "seatsTaken": 0,
+    "flightDestination": {
+      "name": "London",
+      "duration": 563
+    },
+    "flightNumber": 104
+  },
+  {
+    "plane": {
+      "name": "NRG-25",
+      "capacity": 1000
+    },
+    "flightTime": {
+      "day": "Friday",
+      "time": "03:02:00 PM"
+    },
+    "seatsTaken": 0,
+    "flightDestination": {
+      "name": "New York",
+      "duration": 905
+    },
+    "flightNumber": 105
+  },
+  {
+    "plane": {
+      "name": "KC-4",
+      "capacity": 1231
+    },
+    "flightTime": {
+      "day": "Thursday",
+      "time": "08:12:00 AM"
+    },
+    "seatsTaken": 31,
+    "flightDestination": {
+      "name": "Amsterdam",
+      "duration": 549
+    },
+    "flightNumber": 106
   }
 ]

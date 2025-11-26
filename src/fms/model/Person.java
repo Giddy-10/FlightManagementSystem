@@ -41,4 +41,8 @@ public abstract class Person implements Serializable {
 
     // Abstract method
     public abstract String showDetails();
+    
+    public String getNames() {
+        return "Name: " + this.firstname + " " + this.lastname;
+    }
 }

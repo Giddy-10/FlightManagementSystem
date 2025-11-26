@@ -7,7 +7,7 @@ import fms.interfaces.FlightInformationUI;
 import fms.interfaces.RegisterUI;
 import javax.swing.JFrame;
 
-public class interfaceUtils {
+public interface interfaceUtils {
     public static void openAdminDashboard(JFrame currentScreen, String adminName) {
         AdminDashboard adminWindow = new AdminDashboard(adminName);
 

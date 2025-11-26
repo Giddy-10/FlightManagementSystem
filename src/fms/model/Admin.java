@@ -32,4 +32,10 @@ public class Admin extends Person{
     public void createFlight(){
         System.out.println("Creating a new flight...");
     }
+    
+    // Polymorphism (overriding)
+    @Override
+    public String getNames() {
+        return "Admin name: " + this.getFirstName() + " " + this.getLastName();
+    }
 }

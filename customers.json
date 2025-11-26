@@ -4,5 +4,17 @@
     "firstname": "Avgust",
     "lastname": "Kartini",
     "YoB": 1982
+  },
+  {
+    "natID": 7492623,
+    "firstname": "Curtis",
+    "lastname": "Jones",
+    "YoB": 1994
+  },
+  {
+    "natID": 989821,
+    "firstname": "Phillip",
+    "lastname": "Roberts",
+    "YoB": 1998
   }
 ]

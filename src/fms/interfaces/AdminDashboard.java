@@ -65,9 +65,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         scheduleTimeField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        scheduleDayLabel = new javax.swing.JLabel();
+        scheduleTimeLabel = new javax.swing.JLabel();
         saveFlightButton = new javax.swing.JButton();
+        initialSeatsField = new javax.swing.JTextField();
+        initialSeatsLabel = new javax.swing.JLabel();
         changePlanePanel = new javax.swing.JPanel();
         chooseFlightText = new javax.swing.JLabel();
         flightCombo = new javax.swing.JComboBox<>();
@@ -146,9 +148,9 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel3.setText("Plane");
 
-        jLabel4.setText("Day");
+        scheduleDayLabel.setText("Day");
 
-        jLabel5.setText("Time (DD:MM:SS)");
+        scheduleTimeLabel.setText("Time (HH:MM:SS)");
 
         saveFlightButton.setText("Submit");
         saveFlightButton.addActionListener(new java.awt.event.ActionListener() {
@@ -157,56 +159,75 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        initialSeatsField.setText("0");
+        initialSeatsField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                initialSeatsFieldActionPerformed(evt);
+            }
+        });
+
+        initialSeatsLabel.setText("Seats (Optional)");
+
         javax.swing.GroupLayout createFlightPanelLayout = new javax.swing.GroupLayout(createFlightPanel);
         createFlightPanel.setLayout(createFlightPanelLayout);
         createFlightPanelLayout.setHorizontalGroup(
             createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createFlightPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createPlaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(scheduleDayCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scheduleTimeField)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
             .addGroup(createFlightPanelLayout.createSequentialGroup()
                 .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(createFlightPanelLayout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(enterFlightDetailsText, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(createFlightPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel3))
+                            .addGroup(createFlightPanelLayout.createSequentialGroup()
+                                .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(createPlaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(createFlightPanelLayout.createSequentialGroup()
+                                .addComponent(enterFlightDetailsText, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13))
+                            .addGroup(createFlightPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(scheduleDayCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scheduleDayLabel))
+                                .addGap(39, 39, 39)
+                                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(scheduleTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scheduleTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(initialSeatsLabel)
+                                    .addComponent(initialSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(createFlightPanelLayout.createSequentialGroup()
-                        .addGap(176, 176, 176)
+                        .addGap(276, 276, 276)
                         .addComponent(saveFlightButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         createFlightPanelLayout.setVerticalGroup(
             createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createFlightPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(enterFlightDetailsText)
                 .addGap(7, 7, 7)
+                .addComponent(enterFlightDetailsText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(scheduleDayLabel)
+                    .addComponent(scheduleTimeLabel)
+                    .addComponent(initialSeatsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(createFlightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(scheduleDayCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createPlaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scheduleTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(scheduleTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(initialSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveFlightButton)
                 .addContainerGap())
         );
@@ -258,7 +279,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(planeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(confirmPlaneChangeButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         backButton.setText("< Back");
@@ -280,35 +301,29 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(212, 212, 212))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(viewFlightsButton)
                 .addGap(22, 22, 22))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(273, 273, 273)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adminDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
                         .addComponent(changePlanePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(adminDashboardTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(161, 161, 161)))
-                .addGap(70, 70, 70))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createFlightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                        .addGap(28, 28, 28)
+                        .addComponent(createFlightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,17 +332,17 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
                     .addComponent(viewFlightsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(adminDashboardTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(welcomeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(createFlightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(changePlanePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,14 +377,21 @@ public class AdminDashboard extends javax.swing.JFrame {
             String selectedPlaneDetails = (String) createPlaneCombo.getSelectedItem();
             String day = (String) scheduleDayCombo.getSelectedItem();
             String timeStr = scheduleTimeField.getText();
+            String seatsStr = initialSeatsField.getText();
             
             if (selectedDestinationName == null || selectedPlaneDetails == null || day == null || timeStr.isEmpty()) {
                 throw new IllegalArgumentException("All fields must be selected/filled.");
             }
             
-            String planeName = java.util.Arrays.stream(selectedPlaneDetails.split(" "))
-                .limit(selectedPlaneDetails.split(" ").length - 1)
-                .collect(java.util.stream.Collectors.joining(" "));
+            int initialSeats = Integer.parseInt(seatsStr.trim());
+            
+            String planeName;
+            int index = selectedPlaneDetails.indexOf(" (");
+            if (index != -1) {
+                planeName = selectedPlaneDetails.substring(0, index);
+            } else {
+                planeName = selectedPlaneDetails; 
+            }
             Plane plane = manager.getPlaneByName(planeName);
             Destination destination = manager.getDestinationByName(selectedDestinationName);
             Schedule schedule = new Schedule(day, java.sql.Time.valueOf(timeStr));
@@ -378,9 +400,19 @@ public class AdminDashboard extends javax.swing.JFrame {
                 throw new RuntimeException("Error fetching Plane or Destination.");
             }
             
-            manager.addFlight(plane, schedule, destination);
+            if (initialSeats < 0 || initialSeats > plane.getCapacity()) {
+                throw new IllegalArgumentException("Initial seats taken (" + initialSeats + 
+                                                   ") must be between 0 and plane capacity (" + 
+                                                   plane.getCapacity() + ").");
+            }
             
-            javax.swing.JOptionPane.showMessageDialog(this, "Flight to " + destination + " created successfully!");
+            if (initialSeats == 0) {
+                manager.addFlight(plane, schedule, destination);
+            } else {
+                manager.addFlight(plane, schedule, destination, initialSeats);
+            }
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Flight to " + destination.getName() + " created successfully!");
             
             scheduleTimeField.setText("");
             loadDashboardData();
@@ -443,6 +475,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         fms.utils.interfaceUtils.openFlightInfoDisplay(this);
     }//GEN-LAST:event_viewFlightsButtonActionPerformed
+
+    private void initialSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initialSeatsFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_initialSeatsFieldActionPerformed
 
     private void loadDashboardData() {
         FlightDataManager manager = FlightDataManager.getInstance();
@@ -522,15 +558,17 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> destinationCombo;
     private javax.swing.JLabel enterFlightDetailsText;
     private javax.swing.JComboBox<String> flightCombo;
+    private javax.swing.JTextField initialSeatsField;
+    private javax.swing.JLabel initialSeatsLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> planeCombo;
     private javax.swing.JButton saveFlightButton;
     private javax.swing.JComboBox<String> scheduleDayCombo;
+    private javax.swing.JLabel scheduleDayLabel;
     private javax.swing.JTextField scheduleTimeField;
+    private javax.swing.JLabel scheduleTimeLabel;
     private javax.swing.JButton viewFlightsButton;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables

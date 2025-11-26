@@ -8,6 +8,9 @@ import fms.data.FlightDataManager;
 import fms.model.Flight;
 import java.awt.BorderLayout;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -15,7 +18,9 @@ import java.util.List;
  */
 public class FlightInformationUI extends javax.swing.JFrame {
     
-    private javax.swing.JTextArea flightInfoArea;
+//    private javax.swing.JTextArea flightInfoArea;
+    private javax.swing.JTable flightTable;
+    private DefaultTableModel tableModel;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FlightInformationUI.class.getName());
 
@@ -27,41 +32,75 @@ public class FlightInformationUI extends javax.swing.JFrame {
         
         getContentPane().setLayout(new java.awt.BorderLayout());
         
-        flightInfoArea = new javax.swing.JTextArea(20, 50);
-        flightInfoArea.setEditable(false);
-        javax.swing.JScrollPane infoScrollPane = new javax.swing.JScrollPane(flightInfoArea);
+        String[] columnNames = {"Flight No.", "Destination", "Day", "Time", "Available Seats", "Plane Model"};
+        
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        flightTable = new JTable(tableModel);
+        
+        javax.swing.JScrollPane infoScrollPane = new JScrollPane(flightTable);
+        
+        infoScrollPane.setPreferredSize(new java.awt.Dimension(800, 300));
         
         getContentPane().add(infoScrollPane, BorderLayout.CENTER);
         setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        
+        flightTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
         loadFlightData();
         pack();
         setLocationRelativeTo(null);
     }
     
+//    private void loadFlightData() {
+//        FlightDataManager manager = FlightDataManager.getInstance();
+//        List<Flight> flights = manager.getFlights();
+//        
+//        StringBuilder sb = new StringBuilder();
+//        
+//        sb.append(String.format("%-10s | %-15s | %-10s | %-10s | %-10s | %s\n", 
+//                "Flight #", "Destination", "Day", "Time", "Available Seats", "Plane Model"));
+//        sb.append("--------------------------------------------------------------------------------------------------\n");
+//        
+//        for (Flight flight : flights) {
+//            int availableSeats = flight.getPlane().getCapacity() - flight.getSeatsTaken();
+//            
+//            sb.append(String.format("%-10d | %-15s | %-10s | %-10s | %-10d | %s\n", 
+//                flight.getFlightNumber(), 
+//                flight.getDestination().getName(), 
+//                flight.getSchedule().getDay(),
+//                flight.getSchedule().getTime().toString().substring(0, 5),
+//                availableSeats,
+//                flight.getPlane().getName()));
+//        }
+//        
+//        flightInfoArea.setText(sb.toString());
+//    }
+    
     private void loadFlightData() {
+        tableModel.setRowCount(0);
+
         FlightDataManager manager = FlightDataManager.getInstance();
         List<Flight> flights = manager.getFlights();
-        
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append(String.format("%-10s | %-15s | %-10s | %-10s | %-10s | %s\n", 
-                "Flight #", "Destination", "Day", "Time", "Seats", "Plane Model"));
-        sb.append("--------------------------------------------------------------------------------------------------\n");
-        
+
         for (Flight flight : flights) {
             int availableSeats = flight.getPlane().getCapacity() - flight.getSeatsTaken();
-            
-            sb.append(String.format("%-10d | %-15s | %-10s | %-10s | %-10d | %s\n", 
-                flight.getFlightNumber(), 
-                flight.getDestination().getName(), 
+
+            Object[] rowData = new Object[] {
+                flight.getFlightNumber(),
+                flight.getDestination().getName(),
                 flight.getSchedule().getDay(),
-                flight.getSchedule().getTime().toString().substring(0, 5),
+                flight.getSchedule().getTime().toString().substring(0, 5), // HH:MM
                 availableSeats,
-                flight.getPlane().getName()));
+                flight.getPlane().getName()
+            };
+
+            tableModel.addRow(rowData);
         }
-        
-        flightInfoArea.setText(sb.toString());
     }
 
     /**
@@ -79,11 +118,11 @@ public class FlightInformationUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         pack();

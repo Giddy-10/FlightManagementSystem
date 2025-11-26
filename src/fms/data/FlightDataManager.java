@@ -128,6 +128,12 @@ public class FlightDataManager {
         flights.add(newFlight);
         saveAllData();
     }
+    public void addFlight(Plane plane, Schedule schedule, Destination destination, int seats) {
+        int newFlightNum = getNextFlightNumber();
+        Flight newFlight = new Flight(newFlightNum, plane, schedule, destination, seats);
+        flights.add(newFlight);
+        saveAllData();
+    }
     
     public boolean changeFlightPlane(int flightNumber, Plane newPlane) {
         for (Flight flight : flights) {
@@ -144,11 +150,16 @@ public class FlightDataManager {
         return false;
     }
     
-    public boolean attemptBookFlight(int flightNumber) {
+    public boolean attemptBookFlight(int flightNumber, boolean extraLuggage) {
         Flight flight = getFlightByNumber(flightNumber);
 
         if (flight != null) {
             if (flight.bookSeat()) {
+                if (extraLuggage) {
+                    ExtraLuggageTicket extraTicket = new ExtraLuggageTicket(flight.getDestination().getName(), flight.getSchedule());
+                } else {
+                    SimpleTicket simpleTicket = new SimpleTicket(flight.getDestination().getName(), flight.getSchedule());
+                }
                 saveAllData();
                 return true;
             }

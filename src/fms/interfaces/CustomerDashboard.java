@@ -72,6 +72,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         bookFlightSubmitButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        extraLuggageCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +153,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
             }
         });
 
+        extraLuggageCheckBox.setText("Extra luggage");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,7 +175,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(bookFlightSubmitButton)))
+                        .addComponent(bookFlightSubmitButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(extraLuggageCheckBox)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,9 +194,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(extraLuggageCheckBox)
+                .addGap(22, 22, 22)
                 .addComponent(bookFlightSubmitButton)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,7 +257,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
             String[] parts = selectedFlightDetail.split(" ");
             int flightNumber = Integer.parseInt(parts[1]); 
 
-            boolean success = FlightDataManager.getInstance().attemptBookFlight(flightNumber);
+            boolean success = FlightDataManager.getInstance().attemptBookFlight(flightNumber, extraLuggageCheckBox.isSelected());
 
             if (success) {
                 javax.swing.JOptionPane.showMessageDialog(this, 
@@ -310,6 +318,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton bookFlightSubmitButton;
     private javax.swing.JComboBox<String> destinationCombo;
+    private javax.swing.JCheckBox extraLuggageCheckBox;
     private javax.swing.JComboBox<String> flightCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
